@@ -1,0 +1,11 @@
+sample_dbt:
+  target: dev
+  outputs:
+    dev:
+      type: databricks
+      catalog: equiti 
+      schema: bronze
+      host: dbc-e8b57bec-be90.cloud.databricks.com
+      http_path: /sql/1.0/warehouses/bd514860cc1f8e3d 
+      token: "{{ env_var('DBT_DATABRICKS_TOKEN') }}"
+      threads: 4

@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: raw
+    description: Source definitions over the sample raw seeded layer.
+    schema: bronze
+    tables:
+      - name: raw_customers
+        description: Raw customer input data loaded through dbt seed for the sample project.
+      - name: raw_orders
+        description: Raw order input data loaded through dbt seed for the sample project.

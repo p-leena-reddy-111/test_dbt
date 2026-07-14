@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: Standardized customer records from the raw customer seed.
+    columns:
+      - name: customer_id
+        tests:
+          - unique
+          - not_null
+      - name: customer_tier
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['bronze', 'silver', 'gold']
+
+  - name: stg_orders
+    description: Standardized order records from the raw order seed.
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        tests:
+          - not_null

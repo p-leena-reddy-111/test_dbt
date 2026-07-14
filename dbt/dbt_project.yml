@@ -1,0 +1,40 @@
+name: sample_dbt
+version: 1.0.0
+config-version: 2
+
+profile: sample_dbt
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+
+models:
+  +materialized: table
+  +file_format: delta
+  +persist_docs:
+    relation: true
+    columns: true
+  sample_dbt:
+    staging:
+      +on_schema_change: append_new_columns
+    marts:
+      +on_schema_change: append_new_columns
+
+snapshots:
+  sample_dbt:
+    +target_schema: snapshots
+
+flags:
+  use_materialization_v2: true
+  use_replace_on_for_insert_overwrite: true
+  use_managed_iceberg: true
+
+

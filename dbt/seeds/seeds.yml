@@ -1,0 +1,31 @@
+version: 2
+
+seeds:
+  - name: raw_customers
+    description: Seed data representing raw customer records for the sample project.
+    columns:
+      - name: customer_id
+        tests:
+          - unique
+          - not_null
+      - name: customer_tier
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['bronze', 'silver', 'gold']
+
+  - name: raw_orders
+    description: Seed data representing raw order records for the sample project.
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        tests:
+          - not_null
+      - name: order_status
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['pending', 'completed', 'refunded']

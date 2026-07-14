@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: dim_customers
+    description: Customer dimension derived from the standardized customer staging model.
+    columns:
+      - name: customer_id
+        tests:
+          - unique
+          - not_null
+
+  - name: fct_orders
+    description: Incremental order fact model keyed by order_id.
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_customers')
+                field: customer_id
+
+  - name: mart_customer_order_summary
+    description: Reporting mart summarizing customer order volume and completed revenue.
+    columns:
+      - name: customer_id
+        tests:
+          - unique
+          - not_null
+
